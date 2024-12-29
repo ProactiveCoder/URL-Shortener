@@ -1,5 +1,5 @@
 import User from "../models/user.model.js";
-
+import { setToken } from "../utils/authValidation.js";
 export const signInUser=async(req,res)=>{
     const {fullName,email, password}=req.body;
     if(!fullName || !email ||!password){
@@ -43,6 +43,10 @@ export const loginUser=async(req,res)=>{
             message:"password is not match"
         })
     }
+    const token = await setToken(checkUser._id, checkUser.email);
+    console.log("Generated Token",token);
+    res.cookie("authToken",token,{httpOnly: true,
+        secure: true})
     return res.status(200).json({
         success:true,
         message:"login Successfully"
