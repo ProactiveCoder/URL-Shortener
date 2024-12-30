@@ -15,7 +15,8 @@ function Shortener() {
       const response= await fetch("http://localhost:8000/url/",{
         method:"POST",
         headers:{"content-type":"application/json"},
-        body:JSON.stringify(user)
+        body:JSON.stringify(user),
+        credentials: "include",
       })
       const res=await response.json()
       // console.log(res)
@@ -34,6 +35,7 @@ function Shortener() {
       const response= await fetch("http://localhost:8000/url/",{
         method:"GET",
         headers:{"content-type":"application/json"},
+        credentials: "include",
         // body:JSON.stringify(user)
       })
       const res=await response.json()
@@ -51,6 +53,7 @@ function Shortener() {
   },[] );
   return (
     <>
+    <h1>URL SHORTENER</h1>
     <form onSubmit={handleSubmit}>
       <input type="text" name="originalUrl" id="originalUrl" required placeholder="Enter URL" value={user.originalUrl} onChange={handleInput} />
       <button type="submit">Submit</button>
@@ -62,8 +65,8 @@ function Shortener() {
             urldata.map((url, index) => (
               <div key={index}>
                 <span>Original URL: {url.originalUrl} </span>
-                <span> Short URL: {url.shortUlr} </span>
-                <span> Clicks: {url.noOfClikcs || 0}</span>
+                <span> Short URL: {url.shortUrl} </span>
+                <span> Clicks: {url.noOfClicks || 0}</span>
               </div>
             ))
           ) : (

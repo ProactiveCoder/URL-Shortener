@@ -1,6 +1,8 @@
 import express from 'express';
 import {createShortUrl,redirectToWebsite,analyticsOfUrl,findAllUrl} from "../controllers/url.controller.js"
+import { verifyAuth } from '../middlewares/auth.middleware.js';
 const route=express.Router();
+
 
 
 route.post("/",createShortUrl)

@@ -9,14 +9,14 @@ const urlSchema= mongoose.Schema({
     originalUrl:{
         type:String,
         required:true,
-        unique:true,
+        
     },
     visitHistory:[
-        {timestamp:{Type:Number}}
+        {timestamp:{type:Number}}
     ],
     createdBy:{
         type:mongoose.Schema.Types.ObjectId,
-        ref:"user"
+        ref:"User",
     }
 },{timestamps:true})
 

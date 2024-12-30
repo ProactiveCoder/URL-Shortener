@@ -1,6 +1,8 @@
 
 
 import './App.css'
+import Login from './components/Login'
+import Registration from './components/Registration'
 import Shortener from './components/shortener'
 
 function App() {
@@ -8,7 +10,9 @@ function App() {
 
   return (
     <>
-      <h1>URL SHORTENER</h1>
+      
+      <Registration/>
+      <Login/>
       <Shortener/>
     </>
   )
