@@ -53,18 +53,23 @@ function Shortener() {
   },[] );
   return (
     <>
-    <h1>URL SHORTENER</h1>
-    <form onSubmit={handleSubmit}>
-      <input type="text" name="originalUrl" id="originalUrl" required placeholder="Enter URL" value={user.originalUrl} onChange={handleInput} />
-      <button type="submit">Submit</button>
+    <div className="  bg-green-400 h-[91vh] flex flex-col">
+
+
+    <div className="flex flex-col justify-center items-center p-5  ">
+
+    <h1 className="p-5 font-bold text-3xl">URL SHORTENER</h1>
+    <form onSubmit={handleSubmit} className="flex flex-col p-10 rounded-md bg-green-700">
+      <input className="m-2 p-2 rounded-lg" type="text" name="originalUrl" id="originalUrl" required placeholder="Enter URL" value={user.originalUrl} onChange={handleInput} />
+      <button className="bg-pink-400 m-2 p-1 font-bold rounded-lg" type="submit">Submit</button>
     </form>
 
-    <div>
-        <h1>URL DATA</h1>
+    <div className="flex flex-col justify-center items-center bg-green-400 p-5  ">
+        <h1 className="p-5 font-bold text-3xl">URL DATA</h1>
           {urldata ? (
             urldata.map((url, index) => (
-              <div key={index}>
-                <span>Original URL: {url.originalUrl} </span>
+              <div key={index} className="p-2 m-1 rounded-md bg-green-700">
+                <span className="p-2 m-1 rounded-md bg-pink-500">Original URL: {url.originalUrl} </span>
                 <span> Short URL: {url.shortUrl} </span>
                 <span> Clicks: {url.noOfClicks || 0}</span>
               </div>
@@ -73,6 +78,8 @@ function Shortener() {
             <p>Loading...</p>
           )}
         
+    </div>
+    </div>
     </div>
 
 
