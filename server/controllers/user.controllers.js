@@ -45,10 +45,13 @@ export const loginUser=async(req,res)=>{
     }
     const token = await setToken(checkUser._id, checkUser.email);
     console.log("Generated Token",token);
-    res.cookie("authToken",token,{httpOnly: true,
-        secure: true})
-    return res.status(200).json({
+   
+    const { password: _, ...rest } = checkUser.toObject();
+    return res.cookie("authToken",token,{httpOnly: true,
+        secure: true}).status(200).json({
         success:true,
-        message:"login Successfully"
+        message:"login Successfully",
+        user:rest
+
     })
 }

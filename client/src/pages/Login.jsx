@@ -1,7 +1,9 @@
 import { useState } from "react";
-
+import { signInSuccess,signInStart,signInFailure } from "../redux/user/userSlice";
+import {useDispatch} from 'react-redux'
 function Login() {
   const [user, setUser] = useState({ email: "", password: "" });
+  const dispatch=useDispatch();
   const handleInput = (e) => {
     let name = e.target.name;
     let value = e.target.value;
@@ -13,6 +15,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
+        dispatch(signInStart())
       const response = await fetch("http://localhost:8000/user/login", {
         method: "POST",
         headers: { "content-type": "application/json" },
@@ -20,9 +23,17 @@ function Login() {
         credentials: "include",
       });
       const res = await response.json();
+      if(res.success){
+        dispatch(signInSuccess(res.user))
+      }
+      else{
+        dispatch(signInFailure(res.message))
+      }
+
       console.log(res);
     } catch (err) {
       console.log("error in Login :", err);
+      dispatch(signInFailure(err.message ))
     }
   };
   return (
